@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B2B-площадка: премиум-демо</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f1ea;--card:#fff;--ink:#17202b;--mute:#667080;--line:#e2dfd4;--brand:#0f5c4d;--brand2:#e8f3ef;--acc:#f0642f;--acc2:#fdeae2;--warn:#a86a00;--warn2:#fdf2d8;--bad:#b3261e;--bad2:#fbe6e4;--r:12px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 'Golos Text',system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.note{background:var(--ink);color:#fff;font-size:13px;padding:7px 16px;text-align:center}
+header{background:var(--brand);color:#fff}
+.bar{max-width:1180px;margin:auto;padding:12px 16px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.logo{font-weight:800;font-size:18px}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{background:none;border:0;color:#d6e8e2;padding:8px 12px;border-radius:8px;font-weight:600}
+nav button.on{background:#fff;color:var(--brand)}
+.badge{background:var(--acc);color:#fff;border-radius:99px;font-size:12px;padding:0 7px;margin-left:5px}
+main{max-width:1180px;margin:auto;padding:20px 16px 60px}
+h1{font-size:26px;line-height:1.2;margin:0 0 4px}
+h2{font-size:18px;margin:0 0 12px}
+.sub{color:var(--mute);margin:0 0 18px}
+.layout{display:grid;grid-template-columns:250px 1fr;gap:18px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+label{display:block;font-size:13px;font-weight:600;margin:0 0 12px}
+input[type=text],input[type=search],select,textarea{width:100%;margin-top:4px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font-weight:400;font-size:15px}
+.check{display:flex;gap:8px;align-items:center;font-weight:500}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 13px;font-weight:600;font-size:14px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.list{display:grid;gap:10px}
+.ad{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:6px 14px}
+.ad h3{font-size:16px;margin:0;line-height:1.3}
+.ad h3 button{all:unset;cursor:pointer}
+.ad h3 button:hover{color:var(--brand);text-decoration:underline}
+.meta{color:var(--mute);font-size:13px}
+.price{font-weight:800;white-space:nowrap;text-align:right}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tag{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--brand2);color:var(--brand)}
+.tag.a{background:var(--acc2);color:#b23f13}
+.tag.w{background:var(--warn2);color:var(--warn)}
+.tag.b{background:var(--bad2);color:var(--bad)}
+.btn{border:0;background:var(--acc);color:#fff;font-weight:700;padding:9px 15px;border-radius:8px}
+.btn.g{background:var(--brand)}
+.btn.l{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.s{padding:5px 11px;font-size:13px}
+.fav{background:none;border:0;font-size:19px;line-height:1;color:var(--mute);padding:2px}
+.fav.on{color:var(--acc)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.miss{margin:10px 0 0;padding:10px 12px;border-radius:8px;background:var(--warn2);color:#6e4700;font-size:14px}
+.ok{background:var(--brand2);color:var(--brand)}
+.line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center;flex-wrap:wrap}
+.line:last-child{border:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.stat b{display:block;font-size:26px;line-height:1.1}
+.stat span{color:var(--mute);font-size:13px}
+dialog{border:0;border-radius:14px;padding:22px;width:min(560px,calc(100vw - 32px))}
+dialog::backdrop{background:#17202b99}
+.empty{padding:30px;text-align:center;color:var(--mute);background:var(--card);border:1px dashed var(--line);border-radius:var(--r)}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;opacity:0;transition:.2s;pointer-events:none;max-width:calc(100vw - 32px)}
+#toast.on{opacity:1}
+@media(max-width:800px){.layout,.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}h1{font-size:22px}.ad{grid-template-columns:1fr}.price{text-align:left}}
+
+:root{--head:#0f5c4d;--headink:#fff;--shadow:none;--hero1:#0b2a26;--hero2:#0f5c4d}
+body{transition:background .35s,color .35s}
+body[data-t=graphite]{--bg:#10141a;--card:#1a2028;--ink:#eef1f5;--mute:#98a3b3;--line:#2c3541;--brand:#f2b441;--brand2:#3a2f17;--acc:#f2b441;--acc2:#3a2f17;--warn:#f2b441;--warn2:#3a2f17;--bad:#ff8a80;--bad2:#40201e;--head:#171c23;--hero1:#0b0e13;--hero2:#232b36}
+body[data-t=cobalt]{--bg:#eef2fb;--card:#fff;--ink:#101a3a;--mute:#5d688a;--line:#d8dff0;--brand:#2343d6;--brand2:#e4e9fc;--acc:#ff4d6d;--acc2:#ffe5ea;--head:#1a2fa8;--hero1:#0c1551;--hero2:#2343d6}
+body[data-t=terra]{--bg:#f7efe6;--card:#fffaf4;--ink:#2c1c14;--mute:#7c6657;--line:#e8d9c8;--brand:#9c3f1f;--brand2:#f6e2d6;--acc:#2f7d6b;--acc2:#dcefe9;--head:#7a2f17;--hero1:#3b160a;--hero2:#9c3f1f}
+header{background:var(--head);transition:background .35s}
+nav button.on{background:var(--card);color:var(--ink)}
+.btn.l,.chip,input[type=text],input[type=search],select,textarea{background:var(--card);color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--card)}
+.btn{color:#fff}
+body[data-t=graphite] .btn:not(.l){color:#17120a}
+dialog{background:var(--card);color:var(--ink)}
+.ad,.panel{box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s,border-radius .3s,background .35s,border-color .35s}
+.ad:hover{transform:translateY(-2px)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(120% 140% at 80% 20%,var(--hero2),var(--hero1) 70%);color:#fff;transition:background .35s}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-in{position:relative;max-width:1180px;margin:auto;padding:56px 16px 60px;pointer-events:none}
+.hero h1{font-size:44px;line-height:1.08;margin:0 0 14px;max-width:620px;letter-spacing:-.01em}
+.hero p{max-width:480px;color:#ffffffcc;font-size:17px;margin:0 0 20px}
+.nums{display:flex;gap:28px;flex-wrap:wrap}
+.nums b{display:block;font-size:30px;line-height:1.1}
+.nums span{font-size:13px;color:#ffffffb0}
+.cfg{background:var(--card);border-bottom:1px solid var(--line);transition:background .35s}
+.cfg-in{max-width:1180px;margin:auto;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:10px 16px;align-items:center}
+.cfg h4{margin:0;font-size:13px;color:var(--mute);font-weight:600}
+.sw{display:flex;gap:6px;flex-wrap:wrap}
+.sw button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:6px 11px;font-weight:600;font-size:13px}
+.sw button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+body[data-t=graphite] .sw button.on{color:#17120a}
+.sw .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+body[data-l=strict]{--r:3px}
+body[data-l=strict] .ad{padding:9px 14px}
+body[data-l=strict] .btn,body[data-l=strict] .chip,body[data-l=strict] input,body[data-l=strict] select{border-radius:3px}
+body[data-l=soft]{--r:22px;--shadow:0 10px 30px #17202b1f}
+body[data-l=soft] .ad{border-color:transparent;padding:18px 22px}
+body[data-l=soft] .chip,body[data-l=soft] .btn{border-radius:99px}
+body[data-l=show] .list{grid-template-columns:1fr 1fr}
+body[data-l=show] .ad{grid-template-columns:1fr;border-top:4px solid var(--acc)}
+body[data-l=show] .ad h3{font-size:18px}
+body[data-l=show] .price{text-align:left;font-size:18px}
+body.no-resp .f-resp,body.no-fav .fav,body.no-fav .f-fav,body.no-ver .f-ver,body.no-mod .f-mod,body.no-comp .f-comp,body.no-stat .f-stat,body.no-ai .f-ai{display:none}
+body.no-ai .grid2{grid-template-columns:1fr}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.ad,.panel{animation:rise .42s both}
+.list .ad:nth-child(2){animation-delay:.05s}.list .ad:nth-child(3){animation-delay:.1s}.list .ad:nth-child(4){animation-delay:.15s}.list .ad:nth-child(n+5){animation-delay:.2s}
+@media(prefers-reduced-motion:reduce){.ad,.panel{animation:none}}
+@media(max-width:800px){.hero h1{font-size:31px}.hero-in{padding:36px 16px 40px}.cfg-in{grid-template-columns:1fr}body[data-l=show] .list{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-t="emerald" data-l="base">
+<div class="note">Демо сценариев: компании, объявления и цены вымышленные, данные хранятся только в этой вкладке</div>
+<header><div class="bar">
+  <div class="logo">B2B-площадка</div>
+  <nav id="nav"></nav>
+</div></header>
+<section class="hero"><canvas id="gl" aria-hidden="true"></canvas><div class="hero-in">
+<h1>Компании находят друг друга по структурированным данным</h1>
+<p>Живая сеть: каждая линия - отклик между участниками. Переключайте состав функций и оформление прямо здесь.</p>
+<div class="nums"><div><b id="n-ads">6</b><span>объявлений в каталоге</span></div><div><b id="n-resp">9</b><span>откликов</span></div><div><b id="n-mod">7</b><span>модулей включено</span></div></div>
+</div></section>
+<section class="cfg"><div class="cfg-in">
+<h4>Функции MVP</h4><div class="sw" id="sw-f">
+<button class="on" data-f="resp">Отклики</button><button class="on" data-f="fav">Избранное</button><button class="on" data-f="ver">Проверка компаний</button><button class="on" data-f="mod">Модерация</button><button class="on" data-f="comp">Жалобы</button><button class="on" data-f="stat">Аналитика</button><button class="on" data-f="ai">Разбор текста</button></div>
+<h4>Цвет</h4><div class="sw" id="sw-t">
+<button class="on" data-setT="emerald"><i class="dot" style="background:#0f5c4d"></i>Изумруд</button><button data-setT="graphite"><i class="dot" style="background:#f2b441"></i>Графит</button><button data-setT="cobalt"><i class="dot" style="background:#2343d6"></i>Кобальт</button><button data-setT="terra"><i class="dot" style="background:#9c3f1f"></i>Терракота</button></div>
+<h4>Подача</h4><div class="sw" id="sw-l">
+<button class="on" data-setL="base">Базовая</button><button data-setL="strict">Строгая, плотная</button><button data-setL="soft">Мягкая</button><button data-setL="show">Витрина</button></div>
+</div></section>
+<main id="app"></main>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status"></div>
+<script>
+const F={resp:1,fav:1,ver:1,mod:1,comp:1,stat:1,ai:1};
+const TYPES=['Предложение','Запрос','Услуга'];
+const CATS={'Металлопрокат':['Лист','Труба','Арматура'],'Упаковка':['Гофрокороб','Стрейч-плёнка'],'Логистика':['Автоперевозки','Склад'],'Оборудование':['Станки','Погрузчики'],'Стройматериалы':['Цемент','Кирпич']};
+const CITIES=['Москва','Казань','Екатеринбург','Новосибирск','Самара'];
+const KEYS={'лист':['Металлопрокат','Лист'],'труб':['Металлопрокат','Труба'],'арматур':['Металлопрокат','Арматура'],'короб':['Упаковка','Гофрокороб'],'плёнк':['Упаковка','Стрейч-плёнка'],'пленк':['Упаковка','Стрейч-плёнка'],'перевоз':['Логистика','Автоперевозки'],'склад':['Логистика','Склад'],'станок':['Оборудование','Станки'],'погрузчик':['Оборудование','Погрузчики'],'цемент':['Стройматериалы','Цемент'],'кирпич':['Стройматериалы','Кирпич']};
+let uid=20;
+const S={view:'cat',type:'',cat:'',city:'',q:'',ver:false,favOnly:false,favs:new Set([2]),draft:null,
+ ads:[
+ {id:1,type:'Предложение',cat:'Металлопрокат',sub:'Лист',title:'Лист г/к 3 мм, сталь 09Г2С',vol:'120 т',city:'Екатеринбург',price:'от 71 500 ₽/т',co:'ООО «Пример-Металл»',ver:true,st:'pub',resp:[]},
+ {id:2,type:'Запрос',cat:'Упаковка',sub:'Гофрокороб',title:'Нужен гофрокороб 400×300×200, ежемесячно',vol:'15 000 шт',city:'Казань',price:'по запросу',co:'ИП Образцов',ver:true,st:'pub',resp:[]},
+ {id:3,type:'Услуга',cat:'Логистика',sub:'Автоперевозки',title:'Рефрижератор 20 т, межгород по ПФО',vol:'5 машин',city:'Самара',price:'от 62 ₽/км',co:'ООО «Тестовый Маршрут»',ver:false,st:'pub',resp:[]},
+ {id:4,type:'Предложение',cat:'Оборудование',sub:'Погрузчики',title:'Вилочный погрузчик 2,5 т, 2021 г., 3 400 м/ч',vol:'2 шт',city:'Москва',price:'1 480 000 ₽',co:'ООО «Демо-Техника»',ver:true,st:'pub',resp:[]},
+ {id:5,type:'Запрос',cat:'Стройматериалы',sub:'Цемент',title:'Цемент М500 навалом, поставка на объект',vol:'300 т',city:'Новосибирск',price:'по запросу',co:'ООО «Условный Строй»',ver:false,st:'pub',resp:[]},
+ {id:6,type:'Предложение',cat:'Металлопрокат',sub:'Арматура',title:'Арматура А500С d12, склад, резка в размер',vol:'60 т',city:'Самара',price:'от 58 900 ₽/т',co:'ООО «Пример-Металл»',ver:true,st:'pub',resp:[]},
+ {id:7,type:'Услуга',cat:'Логистика',sub:'Склад',title:'Ответственное хранение, 400 паллетомест',vol:'400 п/м',city:'Казань',price:'от 19 ₽/сутки',co:'ИП Складов',ver:false,st:'mod',resp:[]},
+ {id:8,type:'Предложение',cat:'Упаковка',sub:'Стрейч-плёнка',title:'Стрейч-плёнка 500 мм, 20 мкм, от производителя',vol:'8 т',city:'Москва',price:'по запросу',co:'ООО «Вымышленный Полимер»',ver:false,st:'mod',resp:[]}],
+ my:[],notes:[{t:'Профиль компании прошёл проверку',n:false}],
+ comps:[{id:1,ad:'Рефрижератор 20 т, межгород по ПФО',why:'Не отвечают на отклики',open:true}],
+ log:{views:184,search:62,resp:9}};
+const $=s=>document.querySelector(s);
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2400)}
+function note(t){S.notes.unshift({t,n:true})}
+const stTag={pub:['Опубликовано',''],mod:['На модерации','w'],rej:['Отклонено','b'],off:['Снято','w']};
+
+function nav(){
+ const n=S.notes.filter(x=>x.n).length,m=S.ads.filter(a=>a.st==='mod').length+S.comps.filter(c=>c.open).length;
+ $('#nav').innerHTML=[['cat','Каталог',0],['new','Разместить',0],['me','Кабинет',n],['adm','Админ-панель',m]].map(([v,t,c])=>`<button class="${S.view===v?'on':''}" data-go="${v}">${t}${c?`<span class="badge">${c}</span>`:''}</button>`).join('');
+}
+function filtered(){
+ const q=S.q.trim().toLowerCase();
+ return S.ads.filter(a=>a.st==='pub'&&(!S.type||a.type===S.type)&&(!S.cat||a.cat===S.cat)&&(!S.city||a.city===S.city)&&(!S.ver||a.ver)&&(!S.favOnly||S.favs.has(a.id))&&(!q||(a.title+' '+a.co+' '+a.sub).toLowerCase().includes(q)));
+}
+function adRow(a){return `<article class="ad"><div>
+ <div class="row" style="margin-bottom:5px"><span class="tag ${a.type==='Запрос'?'a':''}">${a.type}</span><span class="meta">${esc(a.cat)} / ${esc(a.sub)}</span></div>
+ <h3><button data-open="${a.id}">${esc(a.title)}</button></h3>
+ <div class="meta">${esc(a.vol)} · ${esc(a.city)} · ${esc(a.co)}${a.ver?'<span class="f-ver"> · проверена</span>':''}</div></div>
+ <div><div class="price">${esc(a.price)}</div><div style="text-align:right"><button class="fav ${S.favs.has(a.id)?'on':''}" data-fav="${a.id}" aria-label="В избранное">${S.favs.has(a.id)?'★':'☆'}</button></div></div></article>`}
+function vCat(){
+ const r=filtered();
+ return `<h1>Предложения и запросы компаний</h1><p class="sub">Поиск работает по структурированным полям, а не по свободному тексту</p>
+ <div class="chips">${['',...TYPES].map(t=>`<button class="chip ${S.type===t?'on':''}" data-type="${t}">${t||'Все'}</button>`).join('')}</div>
+ <div class="layout"><aside class="panel">
+ <label>Поиск<input type="search" id="q" value="${esc(S.q)}" placeholder="Например, арматура"></label>
+ <label>Категория<select id="fcat"><option value="">Все</option>${Object.keys(CATS).map(c=>`<option ${S.cat===c?'selected':''}>${c}</option>`).join('')}</select></label>
+ <label>Город<select id="fcity"><option value="">Все</option>${CITIES.map(c=>`<option ${S.city===c?'selected':''}>${c}</option>`).join('')}</select></label>
+ <label class="check f-ver"><input type="checkbox" id="fver" ${S.ver?'checked':''}>Только проверенные</label>
+ <label class="check f-fav" style="margin:0"><input type="checkbox" id="ffav" ${S.favOnly?'checked':''}>Только избранное</label>
+ </aside><section><div class="meta" style="margin-bottom:8px">Найдено: ${r.length}</div><div class="list">${r.map(adRow).join('')||'<div class="empty">Ничего не найдено. Снимите часть фильтров.</div>'}</div></section></div>`;
+}
+function vNew(){
+ const d=S.draft||{type:'Предложение',cat:'',sub:'',title:'',vol:'',city:'',price:''};
+ const miss=S.draft?[['cat','категория'],['vol','объём'],['city','город'],['price','цена']].filter(([k])=>!d[k]).map(x=>x[1]):[];
+ return `<h1>Новое объявление</h1><p class="sub">Форму можно заполнить вручную. Разбор текста только помогает и основную работу не блокирует.</p>
+ <div class="grid2"><section class="panel f-ai"><h2>Опишите своими словами</h2>
+ <label>Текст<textarea id="free" rows="5">Продаём трубу профильную 60х40, 25 т, Казань, 69 000 ₽/т</textarea></label>
+ <button class="btn l" id="parse">Разобрать в поля</button>
+ ${S.draft?(miss.length?`<div class="miss">Не хватает: ${miss.join(', ')}</div>`:'<div class="miss ok">Все ключевые поля заполнены</div>'):''}
+ </section><form class="panel" id="form"><h2>Структурированные поля</h2>
+ <label>Тип<select id="n-type">${TYPES.map(t=>`<option ${d.type===t?'selected':''}>${t}</option>`).join('')}</select></label>
+ <label>Заголовок<input type="text" id="n-title" required value="${esc(d.title)}"></label>
+ <label>Категория<select id="n-cat" required><option value="">Выберите</option>${Object.keys(CATS).map(c=>`<option ${d.cat===c?'selected':''}>${c}</option>`).join('')}</select></label>
+ <label>Объём<input type="text" id="n-vol" required value="${esc(d.vol)}"></label>
+ <label>Город<select id="n-city" required><option value="">Выберите</option>${CITIES.map(c=>`<option ${d.city===c?'selected':''}>${c}</option>`).join('')}</select></label>
+ <label>Цена<input type="text" id="n-price" value="${esc(d.price)}" placeholder="по запросу"></label>
+ <input type="hidden" id="n-sub" value="${esc(d.sub)}">
+ <button class="btn g">${F.mod?"Отправить на модерацию":"Опубликовать"}</button></form></div>`;
+}
+function vMe(){
+ return `<h1>Личный кабинет</h1><p class="sub">ООО «Ваша компания» · статус: проверена</p><div class="grid2">
+ <section class="panel"><h2>Мои объявления</h2>${S.my.map(id=>{const a=S.ads.find(x=>x.id===id),t=stTag[a.st];return `<div class="line"><div><b>${esc(a.title)}</b><div class="row" style="margin-top:4px"><span class="tag ${t[1]}">${t[0]}</span></div></div>${a.st==='pub'?`<button class="btn l s" data-off="${a.id}">Снять</button>`:''}</div>`}).join('')||'<div class="meta">Пока нет. Разместите объявление на вкладке «Разместить».</div>'}
+ <div class="f-resp"><h2 style="margin-top:20px">Мои отклики</h2>${S.ads.filter(a=>a.resp.length).map(a=>`<div class="line"><div><b>${esc(a.title)}</b><div class="meta">${esc(a.resp[0])}</div></div><span class="tag w">Ожидает ответа</span></div>`).join('')||'<div class="meta">Откликнитесь на объявление в каталоге.</div>'}</div></section>
+ <section class="panel"><h2>Уведомления</h2>${S.notes.map(n=>`<div class="line"><span>${esc(n.t)}</span>${n.n?'<span class="tag a">Новое</span>':''}</div>`).join('')}</section></div>`;
+}
+function vAdm(){
+ const q=S.ads.filter(a=>a.st==='mod'),c=S.comps.filter(x=>x.open);
+ return `<h1>Админ-панель</h1><p class="sub">Очередь проверки, жалобы и базовая аналитика</p>
+ <div class="stats f-stat">${[['Просмотры объявлений',S.log.views],['Поисковые запросы',S.log.search],['Отклики',S.log.resp],['Опубликовано',S.ads.filter(a=>a.st==='pub').length]].map(([t,v])=>`<div class="panel stat"><b>${v}</b><span>${t}</span></div>`).join('')}</div>
+ <div class="grid2"><section class="panel f-mod"><h2>Модерация объявлений</h2>${q.map(a=>`<div class="line"><div><b>${esc(a.title)}</b><div class="meta">${esc(a.co)} · ${esc(a.city)}</div></div><div class="row"><button class="btn g s" data-ok="${a.id}">Одобрить</button><button class="btn l s" data-rej="${a.id}">Отклонить</button></div></div>`).join('')||'<div class="meta">Очередь пуста.</div>'}</section>
+ <section class="panel f-comp"><h2>Жалобы</h2>${c.map(x=>`<div class="line"><div><b>${esc(x.ad)}</b><div class="meta">${esc(x.why)}</div></div><button class="btn l s" data-close="${x.id}">Закрыть</button></div>`).join('')||'<div class="meta">Открытых жалоб нет.</div>'}</section></div>`;
+}
+function render(){nav();const g=(i,v)=>{const e=document.getElementById(i);if(e)e.textContent=v};g('n-ads',S.ads.filter(a=>a.st==='pub').length);g('n-resp',S.log.resp);$('#app').innerHTML={cat:vCat,new:vNew,me:vMe,adm:vAdm}[S.view]()}
+function openAd(id){
+ const a=S.ads.find(x=>x.id===id);S.log.views++;
+ const d=$('#dlg');
+ d.innerHTML=`<div class="row" style="margin-bottom:8px"><span class="tag ${a.type==='Запрос'?'a':''}">${a.type}</span><span class="f-ver">${a.ver?'<span class="tag">Компания проверена</span>':'<span class="tag w">Без проверки</span>'}</span></div>
+ <h2>${esc(a.title)}</h2><div class="line"><span class="meta">Цена</span><b>${esc(a.price)}</b></div><div class="line"><span class="meta">Объём</span><b>${esc(a.vol)}</b></div><div class="line"><span class="meta">Город</span><b>${esc(a.city)}</b></div><div class="line"><span class="meta">Компания</span><b>${esc(a.co)}</b></div>
+ <label class="f-resp" style="margin-top:12px">Ваш отклик<textarea id="rtext" rows="3">Готовы обсудить условия и объём.</textarea></label>
+ <div class="row"><button class="btn f-resp" data-send="${a.id}">Откликнуться</button><button class="btn l f-comp" data-comp="${a.id}">Пожаловаться</button><button class="btn l" data-x>Закрыть</button></div>`;
+ d.showModal();
+}
+function parse(){
+ const t=$('#free').value,l=t.toLowerCase(),d={type:/ищем|нужн|куп/.test(l)?'Запрос':/услуг|перевоз|хранени/.test(l)?'Услуга':'Предложение',cat:'',sub:'',title:t.split(/[,.]/)[0].trim().slice(0,70),vol:'',city:'',price:''};
+ for(const k in KEYS)if(l.includes(k)){[d.cat,d.sub]=KEYS[k];break}
+ const v=t.match(/(\d[\d\s]*)\s?(т|шт|кг|паллет\S*|м2)(?![а-яё])/i);if(v)d.vol=v[0].trim();
+ d.city=CITIES.find(c=>l.includes(c.toLowerCase().slice(0,-1)))||'';
+ const p=t.match(/\d[\d\s]*\s?₽(\/\S+)?/);if(p)d.price=p[0].trim();
+ S.draft=d;render();
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;const D=b.dataset;
+ if('go' in D){S.view=D.go;if(D.go==='me')setTimeout(()=>{S.notes.forEach(n=>n.n=false);nav()},1500);render()}
+ else if('type' in D){S.type=D.type;render()}
+ else if(D.open)openAd(+D.open);
+ else if(D.fav){const i=+D.fav;S.favs.has(i)?S.favs.delete(i):S.favs.add(i);render()}
+ else if(b.id==='parse')parse();
+ else if('x' in D)$('#dlg').close();
+ else if(D.send){const a=S.ads.find(x=>x.id==D.send);a.resp.unshift($('#rtext').value.trim()||'Отклик без текста');S.log.resp++;window.burst&&window.burst();note('Отклик отправлен: '+a.title);$('#dlg').close();render();toast('Отклик отправлен')}
+ else if(D.comp){const a=S.ads.find(x=>x.id==D.comp);S.comps.push({id:++uid,ad:a.title,why:'Жалоба пользователя',open:true});$('#dlg').close();render();toast('Жалоба передана модератору')}
+ else if(D.ok||D.rej){const a=S.ads.find(x=>x.id==(D.ok||D.rej));a.st=D.ok?'pub':'rej';if(S.my.includes(a.id))note((D.ok?'Объявление опубликовано: ':'Объявление отклонено: ')+a.title);render();toast(D.ok?'Опубликовано в каталоге':'Отклонено')}
+ else if(D.close){S.comps.find(x=>x.id==D.close).open=false;render()}
+ else if(D.off){S.ads.find(x=>x.id==D.off).st='off';render()}
+});
+document.addEventListener('input',e=>{
+ if(e.target.id==='q'){S.q=e.target.value;const p=e.target.selectionStart;render();const i=$('#q');i.focus();i.setSelectionRange(p,p)}
+});
+document.addEventListener('change',e=>{
+ const t=e.target;
+ if(t.id==='q')S.log.search++;
+ if(t.id==='fcat'){S.cat=t.value;render()}
+ if(t.id==='fcity'){S.city=t.value;render()}
+ if(t.id==='fver'){S.ver=t.checked;render()}
+ if(t.id==='ffav'){S.favOnly=t.checked;render()}
+});
+document.addEventListener('submit',e=>{
+ e.preventDefault();
+ const g=i=>$('#n-'+i).value.trim(),cat=g('cat'),id=++uid;
+ S.ads.push({id,type:g('type'),cat,sub:g('sub')||CATS[cat][0],title:g('title'),vol:g('vol'),city:g('city'),price:g('price')||'по запросу',co:'ООО «Ваша компания»',ver:true,st:F.mod?'mod':'pub',resp:[]});
+ S.my.unshift(id);S.draft=null;S.view='me';note(F.mod?'Объявление отправлено на модерацию':'Объявление опубликовано');render();toast(F.mod?'Отправлено на модерацию':'Опубликовано');
+});
+render();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+function setOn(box,btn){box.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===btn))}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.f){const k=b.dataset.f;F[k]=F[k]?0:1;b.classList.toggle('on',!!F[k]);document.body.classList.toggle('no-'+k,!F[k]);$('#n-mod').textContent=Object.values(F).filter(Boolean).length;render();window.burst&&window.burst()}
+ if(b.dataset.sett){document.body.dataset.t=b.dataset.sett;setOn($('#sw-t'),b);window.recolor&&window.recolor();window.burst&&window.burst()}
+ if(b.dataset.setl){document.body.dataset.l=b.dataset.setl;setOn($('#sw-l'),b);render()}
+});
+(function(){
+ if(!window.THREE)return;
+ const c=document.getElementById('gl');let r;
+ try{r=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:true})}catch(e){return}
+ r.setPixelRatio(Math.min(devicePixelRatio,2));
+ const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(42,2,.1,50);cam.position.z=9;
+ const G=new THREE.Group();sc.add(G);
+ const R=2.75,N=90,pts=[];
+ for(let i=0;i<N;i++){const y=1-(i+.5)/N*2,t=Math.sqrt(1-y*y),a=i*2.39996;pts.push(new THREE.Vector3(Math.cos(a)*t,y,Math.sin(a)*t).multiplyScalar(R))}
+ const edges=[];
+ pts.forEach((p,i)=>{pts.map((q,j)=>[p.distanceTo(q),j]).sort((a,b)=>a[0]-b[0]).slice(1,4).forEach(([d,j])=>{if(i<j)edges.push([i,j])})});
+ const lg=new THREE.BufferGeometry().setFromPoints(edges.flatMap(([a,b])=>[pts[a],pts[b]]));
+ const lm=new THREE.LineBasicMaterial({transparent:true,opacity:.28});G.add(new THREE.LineSegments(lg,lm));
+ const nm=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.35,metalness:.3});
+ const nodes=new THREE.InstancedMesh(new THREE.BoxGeometry(.17,.17,.17),nm,N),o=new THREE.Object3D();
+ pts.forEach((p,i)=>{o.position.copy(p);o.lookAt(0,0,0);const s=.65+(i*7%10)/9;o.scale.set(s,s,s);o.updateMatrix();nodes.setMatrixAt(i,o.matrix)});G.add(nodes);
+ const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.25,1),new THREE.MeshStandardMaterial({flatShading:true,roughness:.25,metalness:.55}));G.add(core);
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(3.45,.012,8,160),new THREE.MeshBasicMaterial({transparent:true,opacity:.5}));ring.rotation.x=1.25;G.add(ring);
+ sc.add(new THREE.AmbientLight(0xffffff,.55));const d=new THREE.DirectionalLight(0xffffff,1.1);d.position.set(4,5,6);sc.add(d);
+ const pm=new THREE.MeshBasicMaterial({color:0xffffff}),pulses=[];
+ for(let i=0;i<46;i++){const m=new THREE.Mesh(new THREE.SphereGeometry(.05,10,10),pm);m.visible=false;G.add(m);pulses.push({m,t:0,e:null,sp:0})}
+ function fire(){const p=pulses.find(x=>!x.e);if(!p)return;p.e=edges[Math.random()*edges.length|0];p.t=0;p.sp=.012+Math.random()*.02;p.m.visible=true}
+ window.burst=()=>{for(let i=0;i<22;i++)fire()};
+ window.recolor=()=>{const v=n=>getComputedStyle(document.body).getPropertyValue(n).trim(),a=new THREE.Color(v('--acc'));lm.color.set(0xffffff);nm.color.copy(a).lerp(new THREE.Color(0xffffff),.35);core.material.color.copy(a);ring.material.color.copy(a);pm.color.copy(a).lerp(new THREE.Color(0xffffff),.5)};
+ recolor();
+ let mx=0,my=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+ function size(){const w=c.clientWidth,h=c.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;const wide=w>800;G.position.set(wide?3.1:0,wide?0:-.2,wide?0:-4);cam.updateProjectionMatrix()}
+ addEventListener('resize',size);size();
+ let f=0,vis=true;new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(c);
+ function draw(){f++;
+  if(f%14===0)fire();
+  G.rotation.y+=.0032;G.rotation.x+=(my*.35-G.rotation.x)*.05;G.position.y+=((-mx*.2)-G.position.y)*.02;core.rotation.y-=.008;core.rotation.z+=.003;
+  pulses.forEach(p=>{if(!p.e)return;p.t+=p.sp;if(p.t>=1){p.e=null;p.m.visible=false;return}p.m.position.lerpVectors(pts[p.e[0]],pts[p.e[1]],p.t)});
+  r.render(sc,cam)}
+ window.burst();
+ if(still){for(let i=0;i<40;i++)draw();return}
+ (function loop(){requestAnimationFrame(loop);if(vis&&!document.hidden)draw()})();
+})();
+</script>
+</body>
+</html>
